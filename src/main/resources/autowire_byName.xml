@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "https://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<beans>
+    <bean id="example" class="bean_Autowiring.Autowire_byName.Example" autowire="byName"/>
+    <bean id="sb" class="bean_Autowiring.Autowire_byName.SampleBean">
+        <property name="message">
+            <value> config set propertys</value>
+        </property>
+    </bean>
+
+</beans>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config/>
+    <!-- bean definitions here -->
+
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost/springjdbc"/>
+        <property name="username" value="root"/>
+        <property name="password" value="root"/>
+    </bean>
+
+    <bean id="localSessionFactoryBean" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+
+<!--        set dataSource property for localSessionFactoryBean-->
+        <property name="dataSource" ref="dataSource"></property>
+
+        <!--        set hibernateProperties property for localSessionFactoryBean-->
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="org.hibernate.FlushMode">COMMIT</prop>
+            </props>
+        </property>
+
+        <!--        set mappingResources property for localSessionFactoryBean-->
+        <property name="mappingResources">
+            <list>
+                <value>spring_with_ORM/student.hbm.xml</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="hibernateTemp" class="org.springframework.orm.hibernate4.HibernateTemplate">
+        <property name="sessionFactory">
+                    <ref bean="localSessionFactoryBean"/>
+        </property>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+                <property name="sessionFactory" ref="localSessionFactoryBean" />
+           </bean>
+
+
+            <bean id="operationBean" class="spring_ORM.spring__ORM.OperationBean">
+                <property name="ht"><ref bean="hibernateTemp"/></property>
+            </bean>
+
+
+            <bean id="employeeDao" class="spring_ORM.spring_ORM2.EmployeeDao">
+                <property name="template"><ref bean="hibernateTemp"/></property>
+            </bean>
+        </beans>

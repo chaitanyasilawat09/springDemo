@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "https://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<beans>
+<bean id="id1" class="Setter_Injection.Dependency_Injection_List_Collection.SampleListBean">
+    <property name="stringList">
+        <list>
+            <value>abc</value>
+            <value>chait</value>
+            <value>Slaw</value>
+        </list>
+    </property>
+</bean>
+</beans>

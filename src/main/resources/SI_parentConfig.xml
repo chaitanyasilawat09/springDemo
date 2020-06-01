@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "https://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<beans>
+    <bean id="id1" class="Car">
+        <property name="fuleType" value="Diseal"/>
+        <property name="maxSpeed" value="100"/>
+    </bean>
+    <bean id="id2" class="Bike">
+        <property name="maxSpeed" value="80"/>
+    </bean>
+</beans>

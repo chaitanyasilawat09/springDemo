@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "https://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<beans>
+    <bean id="demoBean" class="constructor_Injection.two_Constructor_In_SingleBean.DemoBean">
+        <constructor-arg>
+            <value>This is single attribute constructor</value>
+        </constructor-arg>
+    </bean>
+    <bean id="demoBean1" class="constructor_Injection.two_Constructor_In_SingleBean.DemoBean">
+        <constructor-arg value="chait"/>
+        <constructor-arg value="slaw@123"/>
+    </bean>
+</beans>

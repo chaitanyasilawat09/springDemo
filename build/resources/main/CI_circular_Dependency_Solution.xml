@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "https://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<beans>
+    <bean id="sample" class="constructor_Injection.circular_Dependency_Solution.SampleBean">
+        <property name="demoBean">
+            <ref local="demo"/>
+        </property>
+    </bean>
+    <bean id="demo" class="constructor_Injection.circular_Dependency_Solution.DemoBean">
+        <constructor-arg ref="sample"/>
+    </bean>
+</beans>

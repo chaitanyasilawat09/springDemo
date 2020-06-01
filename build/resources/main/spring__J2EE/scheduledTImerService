@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"> <!-- bean definitions here -->
+
+    <context:annotation-config/>
+
+    <bean id="timerTask1" class="org.springframework.scheduling.SchedulingTaskExecutor">
+        <property name="delay" value="5000"/>
+        <property name="period" value="3000"/>
+        <property name="runnable"><ref bean="task1"/></property>
+    </bean>
+
+    <bean id="timeTask2" class="org.springframework.scheduling.SchedulingTaskExecutor">
+        <property name="delay" value="8000"/>
+        <property name="period" value="8000"/>
+        <property name="runnable"><ref bean="task2"/></property>
+    </bean>
+
+    <bean id="task1" class="spring__J2EE.ScheduledTimerService.Task1"/>
+    <bean id="task2" class="spring__J2EE.ScheduledTimerService.Task2"/>
+
+    <bean id="timerFactory" class="org.springframework.scheduling.concurrent.ScheduledExecutorFactoryBean">
+        <property name="scheduledExecutorTasks">
+            <list>
+                <ref bean="task1"/>
+                <ref bean="task2"/>
+                <!--                <value>task1</value>-->
+                <!--                <value>task2</value>-->
+            </list>
+        </property>
+    </bean>
+</beans>

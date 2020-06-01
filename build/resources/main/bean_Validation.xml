@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "https://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<beans>
+                                <!--   dependency-check="simple" check validation only for Premitives
+                                        dependency-check="objects" check validation only for object and Collection
+                                        dependency-check="simple" check validation only for
+                                        all (primitives as well as object and collection  -->
+
+<!--    <bean id="student" class="bean_Validation.Student" dependency-check="simple">-->
+<!--    <bean id="student" class="bean_Validation.Student" dependency-check="objects">-->
+<!--    <bean id="student" class="bean_Validation.Student" dependency-check="all">-->
+    <bean id="student" class="bean_Validation.Student">
+        <property name="a" value="1000"/>
+        <property name="b" value="2000"/>
+        <property name="Data">
+            <list>
+                <value>100</value>
+                <value>1000</value>
+                <value>10000</value>
+            </list>
+        </property>
+        <property name="subject">
+            <ref local="subject"/>
+        </property>
+
+    </bean>
+    <bean id="subject" class="bean_Validation.Subject">
+        <property name="subjects">
+            <list>
+                <value>Maths</value>
+                <value>History</value>
+                <value>English</value>
+            </list>
+        </property>
+    </bean>
+</beans>
