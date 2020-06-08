@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"> <!-- bean definitions here -->
+
+    <context:annotation-config/>
+
+    <bean id="demoBean" class="spring_AOP.DemoBean"/>
+    <bean id="welcomeAdvice" class="spring_AOP.WelComeAdvice"/>
+    <bean id="goodByeAdvice" class="spring_AOP.GoodByeAdvice"/>
+
+    <bean id="methodPointCut" class="org.springframework.aop.support.NameMatchMethodPointcut">
+<!--      use this to apply service on method name start with "by"-->
+                            <property name="mappedName">
+                                <value>by*</value>
+                            </property>
+
+<!--        use this to apply service with more than one name matcher -->
+<!--                            <property name="mappedNames">-->
+<!--                                <list>-->
+<!--                                    <value>by*</value>-->
+<!--                                    <value>get*</value>-->
+<!--                                    <value>te*</value>-->
+<!--                                    <value>*data</value>-->
+<!--                                </list>-->
+<!--                            </property>-->
+
+    </bean>
+
+<!--    define which service apply on this matched method-->
+
+    <bean id="pointCutAdviser" class="org.springframework.aop.support.DefaultPointcutAdvisor">
+
+        <property name="pointcut" ref="methodPointCut"/>
+        <property name="advice" ref="welcomeAdvice"/>
+    </bean>
+
+    <!--    we add both advice as a property of ProxtFactoryBean -->
+
+    <bean id="proxyBeanFactory" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="proxyInterfaces" >
+            <!--            here we have to use interface -->
+            <value>spring_AOP.DemoInterf</value>
+        </property>
+
+        <property name="interceptorNames">
+                <value>pointCutAdviser</value>
+        </property>
+
+        <property name="target" >
+            <ref bean="demoBean"/>
+        </property>
+
+    </bean>
+
+
+</beans>
